@@ -33,12 +33,11 @@ workflows:
                     keyAlias=$CM_KEY_ALIAS_USERNAME
                     storeFile=/tmp/keystore.keystore
                     EOF
-            scripts:
-        - name: Build Android
-          script: |
-            echo $FCI_KEYSTORE | base64 --decode > $FCI_KEYSTORE_PATH
-            chmod +x ./gradlew
-            cd android && ./gradlew assembleRelease    
+            - name: Build Android
+              script: |
+                echo $FCI_KEYSTORE | base64 --decode > $FCI_KEYSTORE_PATH
+                chmod +x ./gradlew
+                cd android && ./gradlew assembleRelease    
         artifacts:
             - app/build/outputs/**/*.apk
         publishing:
